@@ -1,3 +1,4 @@
+import 'package:adoption_pe/components/HomeNavigator.dart';
 import 'package:adoption_pe/components/SessionNavigator.dart';
 import 'package:adoption_pe/pages/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: MainDiv(),
     );
   }
@@ -42,7 +44,7 @@ class _MainDivState extends State<MainDiv> {
   
 
   static final List<Widget> _widgetOptions = <Widget>[
-    Home(),
+    HomeNavigator(),
     SessionNavigator()
   ];
 

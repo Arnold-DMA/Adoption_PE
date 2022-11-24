@@ -27,23 +27,16 @@ class SignUpState extends State<SignUp> {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
     try {
-      UserCredential userCredential = await auth.createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+        email: email, 
+        password: password
+      );
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       print(e.code);
     }
     return user;
   }
-
-  /*Future<void> _savePreferences(String _nameP, String _lastnameP) async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _name = _nameP;
-      _lastname = _lastnameP;
-      prefs.setString('name', _name);
-      prefs.setString('lastname', _lastname);
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +140,11 @@ class SignUpState extends State<SignUp> {
           ElevatedButton(
             onPressed: () async {
               if (_signupKey.currentState!.validate()) {
-                User? user = await signUpUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
+                User? user = await signUpUsingEmailPassword(
+                  email: _emailController.text, 
+                  password: _passwordController.text, 
+                  context: context
+                );
                 print(user);
                 if (user != null) {
                   db.collection('users').doc(user.uid).set(<String, String>{
@@ -155,7 +152,6 @@ class SignUpState extends State<SignUp> {
                     'lastname': _lastnameController.text,
                     'email': _emailController.text
                   }).onError((e, _) => print('Error al registrar los datos del usuario'));
-                  //_savePreferences(_nameController.text, _lastnameController.text);
                 }
               }
             },

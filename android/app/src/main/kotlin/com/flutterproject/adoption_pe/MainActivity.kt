@@ -1,4 +1,4 @@
-package com.example.adoption_pe
+package com.flutterproject.adoption_pe
 
 import io.flutter.embedding.android.FlutterActivity
 

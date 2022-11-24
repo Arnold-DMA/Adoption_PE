@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.adoption_pe">
+    package="com.flutterproject.adoption_pe">
    <application
         android:label="adoption_pe"
         android:name="${applicationName}"

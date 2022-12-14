@@ -104,42 +104,49 @@ class LoginState extends State<Login> {
                 ),
               ),
               Container(height: 15),
+              ElevatedButton(
+                onPressed: () async {
+                  if (_loginKey.currentState!.validate()) {
+                    User? user = await loginUsingEmailPassword(
+                      email: _emailController.text, 
+                      password: _passwordController.text, 
+                      context: context
+                    );
+                    print(user);
+                    if (user != null) {
+                      //Nada de momento
+                    }
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.pressed)){
+                        return Theme.of(context).colorScheme.primary.withOpacity(0.5);
+                      }
+                      return Colors.greenAccent;
+                    }
+                  )
+                ),
+                child: const Text('INICIAR'),
+              ),
+              Container(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_loginKey.currentState!.validate()) {
-                        User? user = await loginUsingEmailPassword(
-                          email: _emailController.text, 
-                          password: _passwordController.text, 
-                          context: context
-                        );
-                        print(user);
-                        if (user != null) {
-                          //Nada de momento
-                        }
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.pressed)){
-                            return Theme.of(context).colorScheme.primary.withOpacity(0.5);
-                          }
-                          return Colors.greenAccent;
-                        }
-                      )
-                    ),
-                    child: const Text('INICIAR'),
-                  ),
                   IconButton(
                     onPressed: (){
 
                     }, 
                     icon: Image.asset('assets/img/google_icon_64.png')
-                  )
+                  ),
+                  IconButton(
+                    onPressed: (){
+
+                    }, 
+                    icon: Image.asset('assets/img/facebook_icon_64.png')
+                  ),
                 ],
               ),
               Container(height: 15),

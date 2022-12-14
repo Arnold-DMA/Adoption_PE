@@ -144,46 +144,53 @@ class SignUpState extends State<SignUp> {
                 ),
               ),
               Container(height: 15),
+              ElevatedButton(
+                onPressed: () async {
+                  if (_signupKey.currentState!.validate()) {
+                    User? user = await signUpUsingEmailPassword(
+                      email: _emailController.text, 
+                      password: _passwordController.text, 
+                      context: context
+                    );
+                    print(user);
+                    if (user != null) {
+                      db.collection('users').doc(user.uid).set(<String, String>{
+                        'name': _nameController.text,
+                        'lastname': _lastnameController.text,
+                        'email': _emailController.text
+                      }).onError((e, _) => print('Error al registrar los datos del usuario'));
+                    }
+                  }
+                },
+                
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.pressed)){
+                        return Theme.of(context).colorScheme.primary.withOpacity(0.5);
+                      }
+                      return Colors.blueAccent;
+                    }
+                  ),
+                ),
+                child: const Text('REGISTRARSE'),
+              ),
+              Container(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_signupKey.currentState!.validate()) {
-                        User? user = await signUpUsingEmailPassword(
-                          email: _emailController.text, 
-                          password: _passwordController.text, 
-                          context: context
-                        );
-                        print(user);
-                        if (user != null) {
-                          db.collection('users').doc(user.uid).set(<String, String>{
-                            'name': _nameController.text,
-                            'lastname': _lastnameController.text,
-                            'email': _emailController.text
-                          }).onError((e, _) => print('Error al registrar los datos del usuario'));
-                        }
-                      }
-                    },
-                    
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.pressed)){
-                            return Theme.of(context).colorScheme.primary.withOpacity(0.5);
-                          }
-                          return Colors.blueAccent;
-                        }
-                      ),
-                    ),
-                    child: const Text('REGISTRARSE'),
-                  ),
                   IconButton(
                     onPressed: (){
 
                     }, 
                     icon: Image.asset('assets/img/google_icon_64.png')
+                  ),
+                  IconButton(
+                    onPressed: (){
+
+                    }, 
+                    icon: Image.asset('assets/img/facebook_icon_64.png')
                   )
                 ],
               ),

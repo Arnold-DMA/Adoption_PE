@@ -1,6 +1,7 @@
 import 'package:adoption_pe/components/HomeNavigator.dart';
 import 'package:adoption_pe/components/SessionNavigator.dart';
 import 'package:adoption_pe/pages/Home.dart';
+import 'package:adoption_pe/pages/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,7 +46,7 @@ class _MainDivState extends State<MainDiv> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     HomeNavigator(),
-    SessionNavigator()
+    Login()
   ];
 
   

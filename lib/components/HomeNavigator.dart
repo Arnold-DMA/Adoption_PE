@@ -1,4 +1,5 @@
 import 'package:adoption_pe/components/MyAppBar.dart';
+import 'package:adoption_pe/pages/Pets.dart';
 import 'package:adoption_pe/pages/homePage.dart';
 import 'package:adoption_pe/pages/photoUpload.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Text('Adoptados'),
+    Pets(),
     Text('Seguimiento'),
     PhotoUpload(),
   ];

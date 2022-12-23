@@ -2,7 +2,7 @@ import 'package:adoption_pe/components/MyAppBar.dart';
 import 'package:adoption_pe/pages/homePage.dart';
 import 'package:adoption_pe/pages/photoUpload.dart';
 import 'package:flutter/material.dart';
-
+import 'package:adoption_pe/pages/Lista.dart';
 
 typedef VoidCallbackParam(int index);
 
@@ -31,6 +31,7 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
     Text('Adoptados'),
     Text('Seguimiento'),
     PhotoUpload(),
+    Lista(),
   ];
 
   void _onItemTapped(int index) {
@@ -66,6 +67,11 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
             icon: Icon(Icons.volunteer_activism),
             label: 'Alerta',
             backgroundColor: Colors.black
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Google',
+              backgroundColor: Colors.black
           ),
         ],
         selectedItemColor: Colors.amber[800],

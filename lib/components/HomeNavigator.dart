@@ -70,7 +70,7 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.chat),
-              label: 'Google',
+              label: 'My Pets',
               backgroundColor: Colors.black
           ),
         ],

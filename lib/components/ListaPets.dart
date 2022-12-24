@@ -1,6 +1,7 @@
 import 'package:adoption_pe/pages/Pets.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ListaPets extends StatefulWidget {
 
@@ -24,7 +25,7 @@ class _ListaPetsState extends State<ListaPets> {
     // TODO: implement initState
     super.initState();
     _myPetsCollection = FirebaseFirestore.instance.collection('myPet');
-    Query query = _myPetsCollection.where('propietario', isEqualTo: '5yLhwHQpKjfoXcn08xU9fgOsTGL2');
+    Query query = _myPetsCollection.where('propietario', isEqualTo: '${FirebaseAuth.instance.currentUser?.uid}');
     query.get().then((querySnapshot) {
       setState(() {
         _myPets = querySnapshot.docs;

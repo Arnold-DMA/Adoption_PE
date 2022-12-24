@@ -9,10 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class FormPets extends StatefulWidget {
-  const FormPets({ Key? key }) : super(key: key);
+
+  final VoidCallback addPet;
+
+  const FormPets({ Key? key, required this.addPet }) : super(key: key);
 
   @override
   _FormPetsState createState() => _FormPetsState();
@@ -303,6 +305,7 @@ class _FormPetsState extends State<FormPets> {
                     _rabiaPolivalenteController.text = DateFormat.yMd().format(_picked);
                     _rabiaPolivalenteTimestamp = Timestamp.fromDate(_picked);
                   }
+                  await getAllUrl(); //OJO
                 },
                 decoration: const InputDecoration(
                   icon: Icon(Icons.date_range),
@@ -335,6 +338,7 @@ class _FormPetsState extends State<FormPets> {
                     _caninaController.text = DateFormat.yMd().format(_picked);
                     _caninaTimestamp = Timestamp.fromDate(_picked);
                   }
+                  
                 },
                 decoration: const InputDecoration(
                   icon: Icon(Icons.date_range),
@@ -356,14 +360,14 @@ class _FormPetsState extends State<FormPets> {
             onPressed: () async {
               if (_formPetsKey.currentState!.validate()) {
 
-                await getAllUrl();
+                
 
                 Map<String, String> misUrls = Map.fromIterable(_urlImages, key:(e) => '${_urlImages.indexOf(e)}', value: (e) => e);
                 print(_urlImages);
                 print(misUrls);
                 //{ for (var e in _urlImages) '${_urlImages.indexOf(e)}' : e };
 
-                db.collection('pet').doc().set(<String, dynamic>{
+                await db.collection('pet').doc().set(<String, dynamic>{
                   'nombre': _nombreController.text,
                   'raza': _razaController.text,
                   'edad': <String, dynamic> {
@@ -381,8 +385,16 @@ class _FormPetsState extends State<FormPets> {
                   },
                   'imagenes': misUrls
                 }).onError((e, _) => print('Error al registrar a la mascota'));
+
+                await db.collection('myPet').doc().set(<String, dynamic> {
+                  'imagen': _urlImages.first!=null? _urlImages.first:'',
+                  'info': '',
+                  'nombre': _nombreController.text,
+                  'propietario': '${FirebaseAuth.instance.currentUser?.uid}'
+                }).onError((e, _) => print('Error al registrar a la mascota'));
                 print(_urlImages);
                 print(misUrls);
+                widget.addPet();
               }
             },
             style: ButtonStyle(

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:adoption_pe/components/LoginGoogleUtils.dart';
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -143,6 +143,11 @@ class LoginState extends State<Login> {
                   ),
                   IconButton(
                     onPressed: (){
+                      Navigator.push(context,
+                            MaterialPageRoute(builder: (context){
+                              return LoginGoogleUtils();
+                            }),
+                      );
 
                     }, 
                     icon: Image.asset('assets/img/facebook_icon_64.png')

@@ -33,7 +33,7 @@ class _PetsState extends State<Pets> {
   Widget build(BuildContext context) {
 
     if (add){
-      return FormPets();
+      return FormPets(addPet: addPet,);
     }
     else {
       return ListaPets(addPet: addPet,);

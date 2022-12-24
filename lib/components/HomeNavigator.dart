@@ -29,11 +29,10 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
+    Lista(),
     Pets(),
     Text('Seguimiento'),
     PhotoUpload(),
-    Lista(),
     ChatPage(),
   ];
 
@@ -53,7 +52,7 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Principal',
+            label: 'Adopción',
             backgroundColor: Colors.black
           ),
           BottomNavigationBarItem(
@@ -74,11 +73,6 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
           BottomNavigationBarItem(
               icon: Icon(Icons.chat),
               label: 'Chat',
-              backgroundColor: Colors.black
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-              label: 'My Pets',
               backgroundColor: Colors.black
           ),
         ],

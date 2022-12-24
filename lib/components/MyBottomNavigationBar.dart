@@ -53,6 +53,11 @@ class _MyStatefulBottomNavigator extends State<MyStatefulBottomNavigator> {
           label: 'Alerta',
           backgroundColor: Colors.black
         ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Alerta',
+            backgroundColor: Colors.black
+        ),
       ],
       selectedItemColor: Colors.amber[800],
       currentIndex: _selectedIndex,

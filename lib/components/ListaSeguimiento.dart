@@ -4,18 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ListaPets extends StatefulWidget {
+class ListaSeguimiento extends StatefulWidget {
 
-  final VoidCallback addPet;
-  final Function({required String idPet}) viewInfo;
   
-  const ListaPets({ Key? key, required this.addPet , required this.viewInfo}) : super(key: key);
+  const ListaSeguimiento({ Key? key}) : super(key: key);
 
   @override
-  _ListaPetsState createState() => _ListaPetsState();
+  _ListaSeguimientoState createState() => _ListaSeguimientoState();
 }
 
-class _ListaPetsState extends State<ListaPets> {
+class _ListaSeguimientoState extends State<ListaSeguimiento> {
 
   List<DocumentSnapshot> _myPets = [];
 
@@ -26,8 +24,8 @@ class _ListaPetsState extends State<ListaPets> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _myPetsCollection = FirebaseFirestore.instance.collection('myPet');
-    Query query = _myPetsCollection.where('propietario', isEqualTo: '${FirebaseAuth.instance.currentUser?.uid}');
+    _myPetsCollection = FirebaseFirestore.instance.collection('adopted');
+    Query query = _myPetsCollection.where('anterior dueño', isEqualTo: '${FirebaseAuth.instance.currentUser?.uid}');
     query.get().then((querySnapshot) {
       setState(() {
         _myPets = querySnapshot.docs;
@@ -51,7 +49,7 @@ class _ListaPetsState extends State<ListaPets> {
           final pet = _myPets[index].data() as Map<String, dynamic>;
           return InkWell(
             onTap: () {
-              widget.viewInfo(idPet: pet['info']);
+              //widget.viewInfo(idPet: pet['info']);
             },
             highlightColor: Colors.black.withOpacity(0.5),
             child: Column(
@@ -70,7 +68,7 @@ class _ListaPetsState extends State<ListaPets> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    widget.viewInfo(idPet: pet['info']);
+                    //widget.viewInfo(idPet: pet['info']);
                   }, 
                   child: Text(pet['nombre'])
                 )
@@ -78,12 +76,6 @@ class _ListaPetsState extends State<ListaPets> {
             ),
           );
         }
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          widget.addPet();
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }

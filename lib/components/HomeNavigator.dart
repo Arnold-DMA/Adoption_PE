@@ -1,10 +1,12 @@
+import 'package:adoption_pe/components/ListaSeguimiento.dart';
 import 'package:adoption_pe/components/MyAppBar.dart';
+import 'package:adoption_pe/pages/Adopcion.dart';
 import 'package:adoption_pe/pages/Pets.dart';
 import 'package:adoption_pe/pages/homePage.dart';
 import 'package:adoption_pe/pages/photoUpload.dart';
 import 'package:flutter/material.dart';
 import 'package:adoption_pe/pages/chatPage.dart';
-import 'package:adoption_pe/pages/Lista.dart';
+import 'package:adoption_pe/pages/MyHomeListaPage.dart';
 
 typedef VoidCallbackParam(int index);
 
@@ -29,10 +31,10 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    Lista(),
+    Adopcion(),
     Pets(),
-    Text('Seguimiento'),
-    PhotoUpload(),
+    ListaSeguimiento(),
+    //PhotoUpload(),
     ChatPage(),
   ];
 
@@ -65,11 +67,11 @@ class _HomeNavigatorState extends State<HomeNavigatorState> {
             label: 'Seguimiento',
             backgroundColor: Colors.black
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             icon: Icon(Icons.volunteer_activism),
             label: 'Alerta',
             backgroundColor: Colors.black
-          ),
+          ),*/
           BottomNavigationBarItem(
               icon: Icon(Icons.chat),
               label: 'Chat',

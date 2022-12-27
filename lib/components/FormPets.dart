@@ -367,7 +367,7 @@ class _FormPetsState extends State<FormPets> {
                 print(misUrls);
                 //{ for (var e in _urlImages) '${_urlImages.indexOf(e)}' : e };
 
-                await db.collection('pet').doc().set(<String, dynamic>{
+                DocumentReference _newPet = await db.collection('pet').add(<String, dynamic>{
                   'nombre': _nombreController.text,
                   'raza': _razaController.text,
                   'edad': <String, dynamic> {
@@ -383,12 +383,15 @@ class _FormPetsState extends State<FormPets> {
                   'propietario': <String, dynamic> {
                     'uid': '${FirebaseAuth.instance.currentUser?.uid}'
                   },
-                  'imagenes': misUrls
-                }).onError((e, _) => print('Error al registrar a la mascota'));
+                  'imagenes': misUrls,
+                  'estado': 'propio'
+                }).catchError((error){
+                  print(error);
+                });
 
                 await db.collection('myPet').doc().set(<String, dynamic> {
-                  'imagen': _urlImages.first!=null? _urlImages.first:'',
-                  'info': '',
+                  'imagen': _urlImages.first,
+                  'info': _newPet.id,
                   'nombre': _nombreController.text,
                   'propietario': '${FirebaseAuth.instance.currentUser?.uid}'
                 }).onError((e, _) => print('Error al registrar a la mascota'));

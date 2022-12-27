@@ -3,36 +3,40 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-Future<void> main() async{
+/*Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(Lista ());
-}
+}*/
 
-class Lista extends StatelessWidget {
-  const Lista ({Key? key}) : super(key: key);
+/*class Lista extends StatelessWidget {
+
+  final Function({required String idPet}) viewInfo;
+  const Lista ({Key? key, required this.viewInfo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: MyHomePage(),
+        body: MyHomeListaPage(),
       ),
     );
   }
-}
+}*/
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MyHomeListaPage extends StatefulWidget {
+
+  final Function({required String idPet}) viewInfo;
+  const MyHomeListaPage({Key? key, required this.viewInfo}) : super(key: key);
 
   @override
-  _MyHomePagesState createState() => _MyHomePagesState();
+  _MyHomeListaPagesState createState() => _MyHomeListaPagesState();
 }
 
-class _MyHomePagesState extends State<MyHomePage> {
+class _MyHomeListaPagesState extends State<MyHomeListaPage> {
 
   final Stream<QuerySnapshot> _usersStream =
-  FirebaseFirestore.instance.collection('myPet').snapshots();
+  FirebaseFirestore.instance.collection('adoption').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +58,7 @@ class _MyHomePagesState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text(
-                'Inserte caracteristica de animal',
+                'Inserte caracteristica de la mascota',
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(
@@ -117,7 +121,13 @@ class _MyHomePagesState extends State<MyHomePage> {
                                       .buttonColor,
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                child: Text('Informacion'),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    widget.viewInfo(idPet: data['info']);
+                                  },
+                                  child: Text(data['nombre']),
+                                ),
+                                
                               ),
                             ),
                           ],

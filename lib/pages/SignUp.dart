@@ -159,6 +159,7 @@ class SignUpState extends State<SignUp> {
                         'lastname': _lastnameController.text,
                         'email': _emailController.text
                       }).onError((e, _) => print('Error al registrar los datos del usuario'));
+                      Navigator.pop(context);
                     }
                   }
                 },
